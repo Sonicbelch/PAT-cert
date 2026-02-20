@@ -7,27 +7,133 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="certificate-header">
-      <div class="header-branding">
-        <img
-          src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/649553f94357fbf79c52ea7d_EOCLogoB3Asset%2027.png"
-          alt="Motorcycle logo"
-          class="branding-logo"
-        />
-        <img
-          src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/6499a1507ff81ae28c67b4c6_textLogoB4Asset%2029-p-500.png"
-          alt="Text logo"
-          class="branding-logo"
-        />
-      </div>
+    <div class="page-wrap">
+      <header class="certificate-header">
+        <div class="header-branding">
+          <img
+            src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/649553f94357fbf79c52ea7d_EOCLogoB3Asset%2027.png"
+            alt="Motorcycle logo"
+            class="branding-logo"
+          />
+          <img
+            src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/6499a1507ff81ae28c67b4c6_textLogoB4Asset%2029-p-500.png"
+            alt="Text logo"
+            class="branding-logo"
+          />
+        </div>
 
-      <div class="header-title-block">
-        <h1 class="certificate-title">Portable / Fixed Appliance PAT Certificate</h1>
-        <p class="certificate-subtitle">
-          Equipment formal visual and combined inspection and test
-        </p>
-      </div>
-    </header>
+        <div class="header-title-block">
+          <h1 class="certificate-title">Portable / Fixed Appliance PAT Certificate</h1>
+          <p class="certificate-subtitle">
+            Equipment formal visual and combined inspection and test
+          </p>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2>Part 1: Details of Installation</h2>
+          <div class="form-grid">
+            <label>
+              Client Name
+              <input type="text" name="clientName" />
+            </label>
+            <label>
+              Site Address
+              <input type="text" name="siteAddress" />
+            </label>
+            <label>
+              Location
+              <input type="text" name="location" />
+            </label>
+            <label>
+              Postcode
+              <input type="text" name="postcode" />
+            </label>
+            <label>
+              Certificate No.
+              <input type="text" name="certificateNo" />
+            </label>
+            <label>
+              Date of Inspection
+              <input type="date" name="inspectionDate" />
+            </label>
+            <label>
+              Inspector Name
+              <input type="text" name="inspectorName" />
+            </label>
+            <label>
+              Company
+              <input type="text" name="company" />
+            </label>
+            <label>
+              Engineer Signature (name)
+              <input type="text" name="signature" />
+            </label>
+            <label>
+              Next Inspection Due
+              <input type="date" name="nextInspectionDate" />
+            </label>
+          </div>
+          <label class="full-width notes-field">
+            Comments / Limitations
+            <textarea rows="4" name="comments"></textarea>
+          </label>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <h2>Part 2: Results of Visual Inspection and Testing</h2>
+            <button id="addRowBtn" type="button" class="btn subtle">+ Add Item</button>
+          </div>
+
+          <div class="table-wrap">
+            <table id="resultsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Asset ID</th>
+                  <th>Appliance Description</th>
+                  <th>Location</th>
+                  <th>Class</th>
+                  <th>Visual</th>
+                  <th>Earth Continuity (Ω)</th>
+                  <th>Insulation (MΩ)</th>
+                  <th>Polarity</th>
+                  <th>Leakage (mA)</th>
+                  <th>Result</th>
+                  <th class="actions-col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+
+          <div class="totals" aria-live="polite">
+            <div class="total-box total-items">
+              <span>Total Items</span>
+              <strong id="totalItems">0</strong>
+            </div>
+            <div class="total-box total-pass">
+              <span>Passed</span>
+              <strong id="totalPass">0</strong>
+            </div>
+            <div class="total-box total-fail">
+              <span>Failed</span>
+              <strong id="totalFail">0</strong>
+            </div>
+            <div class="total-box total-rate">
+              <span>Pass Rate</span>
+              <strong id="passRate">0%</strong>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer-actions no-print">
+          <button id="printBtn" type="button" class="btn primary">Print Certificate</button>
+        </div>
+      </main>
+    </div>
 
     <script src="script.js"></script>
   </body>
