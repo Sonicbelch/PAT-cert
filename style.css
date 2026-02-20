@@ -1,0 +1,260 @@
+:root {
+  --border: #111;
+  --font: "Arial", "Helvetica", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eaeaea;
+  font-family: var(--font);
+  color: #000;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 10px auto;
+  padding: 10mm;
+  background: #fff;
+  border: 1px solid #666;
+}
+
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.brand-company {
+  font-size: 22px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  max-width: 320px;
+}
+
+.brand-right {
+  width: 130px;
+  height: 70px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.brand-right img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.logo-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 1px dashed var(--border);
+}
+
+.title-block {
+  border: 1px solid var(--border);
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 8px;
+}
+
+.title-block h1 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.title-block p {
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+
+h2 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+}
+
+.section-box {
+  border: 1px solid var(--border);
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+label,
+.signature-wrap {
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #555;
+  padding: 2px 4px;
+  font-size: 11px;
+  font-family: var(--font);
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.grid-two,
+.grid-three,
+.grid-four {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.grid-two { grid-template-columns: 1fr 1fr; }
+.grid-three { grid-template-columns: repeat(3, 1fr); }
+.grid-four { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+.signature-text {
+  border: 1px solid #555;
+  min-height: 24px;
+  padding: 2px 4px;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+button {
+  border: 1px solid #222;
+  background: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.threshold-panel,
+.mapping-panel {
+  border: 1px solid #777;
+  padding: 6px;
+  margin-bottom: 6px;
+}
+
+.threshold-panel h3,
+.mapping-panel h3 {
+  margin: 0 0 4px;
+  font-size: 11px;
+}
+
+.threshold-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  font-size: 9px;
+  padding: 2px;
+  vertical-align: top;
+}
+
+th { text-align: center; font-weight: 700; }
+
+td input,
+td select {
+  font-size: 9px;
+  padding: 1px 2px;
+}
+
+.pass-cell { font-weight: 700; text-align: center; }
+.pass-ok { color: #000; }
+.pass-fail { color: #000; background: #f3f3f3; }
+.pass-visual { color: #000; font-style: italic; }
+
+.totals {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 5px;
+}
+
+.cert-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 4px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.footer-optional:empty {
+  display: none;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 10mm;
+}
+
+@media print {
+  body {
+    background: #fff;
+    margin: 0;
+  }
+
+  .page {
+    margin: 0;
+    border: none;
+    width: auto;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .print-hide,
+  button,
+  .controls,
+  .threshold-panel,
+  .mapping-panel {
+    display: none !important;
+  }
+
+  input,
+  textarea,
+  select {
+    border: 1px solid transparent;
+    padding: 0;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+}
