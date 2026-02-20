@@ -1,0 +1,35 @@
+.certificate-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 12px;
+}
+
+.header-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.branding-logo {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+}
+
+.header-title-block {
+  align-self: flex-start;
+}
+
+.certificate-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.certificate-subtitle {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+}
