@@ -6,6 +6,8 @@ const totalItemsEl = document.getElementById('totalItems');
 const totalPassEl = document.getElementById('totalPass');
 const totalFailEl = document.getElementById('totalFail');
 const passRateEl = document.getElementById('passRate');
+const inspectionDateEl = document.querySelector('input[name="inspectionDate"]');
+const nextInspectionDateEl = document.querySelector('input[name="nextInspectionDate"]');
 
 const defaultRows = [
   {
@@ -69,7 +71,7 @@ function makeRow(data = {}) {
         ${selectOptions(['Pass', 'Fail'], data.visual || 'Pass')}
       </select>
     </td>
-    <td><input type="number" step="0.01" min="0" name="earth" value="${data.earth || ''}" /></td>
+    <td><input type="text" name="earth" inputmode="decimal" value="${data.earth || ''}" /></td>
     <td><input type="number" step="0.01" min="0" name="insulation" value="${data.insulation || ''}" /></td>
     <td>
       <select name="polarity">
@@ -98,8 +100,50 @@ function makeRow(data = {}) {
     updateTotals();
   });
 
+  row.querySelector('select[name="classType"]').addEventListener('change', () => {
+    syncClassTypeState(row);
+  });
+
+  syncClassTypeState(row);
   paintResult(row);
   return row;
+}
+
+function syncClassTypeState(row) {
+  const classType = row.querySelector('select[name="classType"]').value;
+  const earthInput = row.querySelector('input[name="earth"]');
+
+  if (classType === 'II') {
+    if (!earthInput.disabled && earthInput.value) {
+      earthInput.dataset.previousValue = earthInput.value;
+    }
+    earthInput.value = 'N/A';
+    earthInput.disabled = true;
+  } else {
+    earthInput.disabled = false;
+    earthInput.value = earthInput.dataset.previousValue || '';
+  }
+}
+
+function formatUkDate(date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+function setDefaultDates() {
+  const today = new Date();
+  const nextInspection = new Date(today);
+  nextInspection.setFullYear(today.getFullYear() + 3);
+
+  if (inspectionDateEl && !inspectionDateEl.value) {
+    inspectionDateEl.value = formatUkDate(today);
+  }
+
+  if (nextInspectionDateEl && !nextInspectionDateEl.value) {
+    nextInspectionDateEl.value = formatUkDate(nextInspection);
+  }
 }
 
 function paintResult(row) {
@@ -135,6 +179,7 @@ function addRow(data = {}) {
 }
 
 defaultRows.forEach((row) => addRow(row));
+setDefaultDates();
 
 addRowBtn.addEventListener('click', () => addRow());
 printBtn.addEventListener('click', () => window.print());

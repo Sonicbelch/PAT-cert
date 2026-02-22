@@ -43,10 +43,6 @@
               <input type="text" name="siteAddress" />
             </label>
             <label>
-              Location
-              <input type="text" name="location" />
-            </label>
-            <label>
               Postcode
               <input type="text" name="postcode" />
             </label>
@@ -56,7 +52,7 @@
             </label>
             <label>
               Date of Inspection
-              <input type="date" name="inspectionDate" />
+              <input type="text" name="inspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
             </label>
             <label>
               Inspector Name
@@ -64,7 +60,12 @@
             </label>
             <label>
               Company
-              <input type="text" name="company" />
+              <input
+                type="text"
+                name="company"
+                value="Electricians On Call, 18 Bulstrode Street, London W1U 2JL"
+                readonly
+              />
             </label>
             <label>
               Engineer Signature (name)
@@ -72,7 +73,7 @@
             </label>
             <label>
               Next Inspection Due
-              <input type="date" name="nextInspectionDate" />
+              <input type="text" name="nextInspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
             </label>
           </div>
           <label class="full-width notes-field">
@@ -127,9 +128,19 @@
               <strong id="passRate">0%</strong>
             </div>
           </div>
+
+          <div class="repair-codes">
+            Repair codes: 1 - Damaged flex – Re-terminated 2 - Damaged – Plug removed 3 - Safety fault R1 - Replaced plug top R2 - Replaced plug top fuse R3 - Change plug top fuse from 13A to 3A fuse R4 -<br />
+            Change plug top fuse from 13A to 5A fuse R5 - Change plug top fuse from 13A to 10A fuse R6 - Replaced extension lead R7 - Shortened damaged power-cord/cable and refitted plug top<br />
+            R8 - Rewired incorrectly wired plug top R9 - Repaired/refitted insecure or wrongly fitted power-cord/cable grip R10 - Removed cardboard wiring diagram from plug top (Fire hazard)<br />
+            R11 - Repaired or refitted appliance case<br />
+            Created by EOC © Copyright Electricians On Call 2025<br />
+            18 Bulstrode Street, London W1U 2JL
+          </div>
         </section>
 
         <div class="footer-actions no-print">
+          <span class="print-note">For a clean print, disable Headers &amp; Footers in the print dialog.</span>
           <button id="printBtn" type="button" class="btn primary">Print Certificate</button>
         </div>
       </main>

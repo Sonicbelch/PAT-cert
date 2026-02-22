@@ -29,14 +29,19 @@ body {
 }
 
 .certificate-header {
+  position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  justify-content: center;
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 12px;
+  min-height: 72px;
 }
 
 .header-branding {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -51,6 +56,8 @@ body {
 
 .header-title-block {
   align-self: flex-start;
+  width: 100%;
+  text-align: center;
 }
 
 .certificate-title {
@@ -192,7 +199,22 @@ td.row-number {
 
 .footer-actions {
   display: flex;
+  align-items: center;
+  gap: 12px;
   justify-content: flex-end;
+}
+
+.print-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.repair-codes {
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: 0.72rem;
+  line-height: 1.35;
 }
 
 .btn {
