@@ -20,7 +20,6 @@ const defaultRows = [
     earth: '0.07',
     insulation: '>299',
     polarity: 'Pass',
-    leakage: '',
     result: 'Pass'
   },
   {
@@ -32,7 +31,6 @@ const defaultRows = [
     earth: '0.06',
     insulation: '>299',
     polarity: 'Pass',
-    leakage: '',
     result: 'Pass'
   },
   {
@@ -44,7 +42,6 @@ const defaultRows = [
     earth: 'N/A',
     insulation: '>299',
     polarity: 'Pass',
-    leakage: '',
     result: 'Pass'
   }
 ];
@@ -90,7 +87,6 @@ function makeRow(data = {}) {
         ${selectOptions(['Pass', 'Fail', 'N/A'], data.polarity || 'Pass')}
       </select>
     </td>
-    <td><input type="number" step="0.01" min="0" name="leakage" value="${data.leakage || ''}" /></td>
     <td>
       <select name="result" class="result-select">
         ${selectOptions(['Pass', 'Fail'], data.result || 'Pass')}
