@@ -12,40 +12,40 @@ const certNoInput = document.querySelector('#certNo') || document.querySelector(
 
 const defaultRows = [
   {
-    assetId: 'KET-001',
-    appliance: 'Kettle',
-    location: 'Kitchen',
+    assetId: 'FRI-001',
+    appliance: 'Fridge',
+    location: '',
     classType: 'I',
     visual: 'Pass',
-    earth: '0.15',
-    insulation: '2.4',
+    earth: '0.07',
+    insulation: '>299',
     polarity: 'Pass',
-    leakage: '0.20',
+    leakage: '',
     result: 'Pass'
   },
   {
-    assetId: 'EXT-002',
-    appliance: 'Extension Lead',
-    location: 'Office',
+    assetId: 'WAS-002',
+    appliance: 'Washing Machine',
+    location: '',
     classType: 'I',
     visual: 'Pass',
-    earth: '0.18',
-    insulation: '1.8',
+    earth: '0.06',
+    insulation: '>299',
     polarity: 'Pass',
-    leakage: '0.25',
+    leakage: '',
     result: 'Pass'
   },
   {
-    assetId: 'TOA-003',
-    appliance: 'Toaster',
-    location: 'Canteen',
-    classType: 'I',
-    visual: 'Fail',
-    earth: '0.62',
-    insulation: '0.7',
-    polarity: 'Fail',
-    leakage: '0.98',
-    result: 'Fail'
+    assetId: 'VAC-003',
+    appliance: 'Vacuum Cleaner',
+    location: '',
+    classType: 'II',
+    visual: 'Pass',
+    earth: 'N/A',
+    insulation: '>299',
+    polarity: 'Pass',
+    leakage: '',
+    result: 'Pass'
   }
 ];
 
@@ -55,7 +55,18 @@ function selectOptions(options, selectedValue) {
     .join('');
 }
 
+function generateEarthContinuityValue() {
+  const min = 0.02;
+  const max = 1.2;
+  const value = Math.random() * (max - min) + min;
+  return value.toFixed(2);
+}
+
 function makeRow(data = {}) {
+  const classType = data.classType || 'I';
+  const earthValue = data.earth || (classType === 'II' ? 'N/A' : generateEarthContinuityValue());
+  const insulationValue = data.insulation || '>299';
+
   const row = document.createElement('tr');
   row.innerHTML = `
     <td class="row-number"></td>
@@ -64,7 +75,7 @@ function makeRow(data = {}) {
     <td><input type="text" name="location" value="${data.location || ''}" /></td>
     <td>
       <select name="classType">
-        ${selectOptions(['I', 'II', 'III'], data.classType || 'I')}
+        ${selectOptions(['I', 'II', 'III'], classType)}
       </select>
     </td>
     <td>
@@ -72,8 +83,8 @@ function makeRow(data = {}) {
         ${selectOptions(['Pass', 'Fail'], data.visual || 'Pass')}
       </select>
     </td>
-    <td><input type="text" name="earth" inputmode="decimal" value="${data.earth || ''}" /></td>
-    <td><input type="number" step="0.01" min="0" name="insulation" value="${data.insulation || ''}" /></td>
+    <td><input type="text" name="earth" inputmode="decimal" value="${earthValue}" /></td>
+    <td><input type="text" name="insulation" value="${insulationValue}" /></td>
     <td>
       <select name="polarity">
         ${selectOptions(['Pass', 'Fail', 'N/A'], data.polarity || 'Pass')}
@@ -115,14 +126,14 @@ function syncClassTypeState(row) {
   const earthInput = row.querySelector('input[name="earth"]');
 
   if (classType === 'II') {
-    if (!earthInput.disabled && earthInput.value) {
+    if (!earthInput.disabled && earthInput.value && earthInput.value !== 'N/A') {
       earthInput.dataset.previousValue = earthInput.value;
     }
     earthInput.value = 'N/A';
     earthInput.disabled = true;
   } else {
     earthInput.disabled = false;
-    earthInput.value = earthInput.dataset.previousValue || '';
+    earthInput.value = earthInput.dataset.previousValue || earthInput.value || generateEarthContinuityValue();
   }
 }
 
