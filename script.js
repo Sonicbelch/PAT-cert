@@ -8,6 +8,7 @@ const totalFailEl = document.getElementById('totalFail');
 const passRateEl = document.getElementById('passRate');
 const inspectionDateEl = document.querySelector('input[name="inspectionDate"]');
 const nextInspectionDateEl = document.querySelector('input[name="nextInspectionDate"]');
+const certNoInput = document.querySelector('#certNo') || document.querySelector('input[name="certificateNo"]');
 
 const defaultRows = [
   {
@@ -146,6 +147,23 @@ function setDefaultDates() {
   }
 }
 
+function pad2(value) {
+  return String(value).padStart(2, '0');
+}
+
+function generateCertNo() {
+  const now = new Date();
+  const datePart = `${now.getFullYear()}${pad2(now.getMonth() + 1)}${pad2(now.getDate())}`;
+  const timePart = `${pad2(now.getHours())}${pad2(now.getMinutes())}${pad2(now.getSeconds())}`;
+  return `EOCPAT-${datePart}-${timePart}`;
+}
+
+function setAutoCertificateNo() {
+  if (certNoInput && !certNoInput.value.trim()) {
+    certNoInput.value = generateCertNo();
+  }
+}
+
 function paintResult(row) {
   const result = row.querySelector('.result-select').value;
   row.classList.remove('result-pass', 'result-fail');
@@ -180,6 +198,7 @@ function addRow(data = {}) {
 
 defaultRows.forEach((row) => addRow(row));
 setDefaultDates();
+setAutoCertificateNo();
 
 addRowBtn.addEventListener('click', () => addRow());
 printBtn.addEventListener('click', () => window.print());
