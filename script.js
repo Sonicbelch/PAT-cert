@@ -3,6 +3,7 @@ const addRowBtn = document.getElementById('addRowBtn');
 const printBtn = document.getElementById('printBtn');
 const newDescriptionInput = document.getElementById('newDescription');
 const applianceList = document.getElementById('applianceList');
+const locationList = document.getElementById('locationList');
 
 const totalItemsEl = document.getElementById('totalItems');
 const totalPassEl = document.getElementById('totalPass');
@@ -22,6 +23,28 @@ const applianceSuggestions = [
   'Rice Cooker', 'Sanders', 'Soldering Station', 'Space Heater', 'Table Saw', 'Television', 'Toaster',
   'Tumble Dryer', 'Vacuum Cleaner', 'Washing Machine', 'Water Cooler', 'Water Pump', 'Welder',
   'Work Light', 'Router', 'Server Rack', 'Stereo Amplifier', 'Subwoofer', 'Steam Cleaner'
+];
+
+const locationStorageKey = 'patCustomLocations';
+const lastLocationStorageKey = 'patLastLocation';
+const locationSuggestions = [
+  'Kitchen',
+  'Utility Room',
+  'Hall',
+  'Living Room',
+  'Bedroom 1',
+  'Bedroom 2',
+  'Bathroom',
+  'Ensuite',
+  'Office',
+  'Garage',
+  'Loft',
+  'Store Room',
+  'Reception',
+  'Server Room',
+  'Plant Room',
+  'Corridor',
+  'Meeting Room'
 ];
 
 const applianceClassMap = {
@@ -136,16 +159,18 @@ function generateEarthContinuityValue() {
 }
 
 function makeRow(data = {}) {
+  const lastLocation = localStorage.getItem(lastLocationStorageKey) || '';
   const classType = data.classType || 'I';
   const earthValue = data.earth || (classType === 'II' ? 'N/A' : generateEarthContinuityValue());
   const insulationValue = data.insulation || '>299';
+  const locationValue = data.location || lastLocation;
 
   const row = document.createElement('tr');
   row.innerHTML = `
     <td class="row-number"></td>
     <td><input type="text" name="assetId" value="${data.assetId || ''}" /></td>
     <td><input type="text" name="appliance" value="${data.appliance || ''}" /></td>
-    <td><input type="text" name="location" value="${data.location || ''}" /></td>
+    <td><input type="text" name="location" list="locationList" value="${locationValue}" /></td>
     <td>
       <select name="classType">
         ${selectOptions(['I', 'II', 'III'], classType)}
@@ -188,9 +213,36 @@ function makeRow(data = {}) {
     syncClassTypeState(row);
   });
 
+  const locationInput = row.querySelector('input[name="location"]');
+  locationInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      focusNextCell(row, locationInput);
+    }
+  });
+
+  locationInput.addEventListener('change', () => {
+    saveLocationSuggestion(locationInput.value);
+  });
+
   syncClassTypeState(row);
   paintResult(row);
   return row;
+}
+
+function focusNextCell(row, currentElement) {
+  const editableCells = [...row.querySelectorAll('input:not([disabled]), select:not([disabled]), textarea:not([disabled])')];
+  const currentIndex = editableCells.indexOf(currentElement);
+
+  if (currentIndex !== -1 && editableCells[currentIndex + 1]) {
+    editableCells[currentIndex + 1].focus();
+    return;
+  }
+
+  const nextRowLocation = row.nextElementSibling?.querySelector('input[name="location"]');
+  if (nextRowLocation) {
+    nextRowLocation.focus();
+  }
 }
 
 function syncClassTypeState(row) {
@@ -291,6 +343,48 @@ function populateApplianceSuggestions() {
   });
 }
 
+function getStoredLocations() {
+  try {
+    const storedLocations = JSON.parse(localStorage.getItem(locationStorageKey) || '[]');
+    return Array.isArray(storedLocations) ? storedLocations : [];
+  } catch {
+    return [];
+  }
+}
+
+function renderLocationSuggestions() {
+  if (!locationList) {
+    return;
+  }
+
+  const uniqueLocations = [...new Set([...locationSuggestions, ...getStoredLocations()])];
+  locationList.innerHTML = '';
+
+  uniqueLocations.forEach((location) => {
+    const option = document.createElement('option');
+    option.value = location;
+    locationList.appendChild(option);
+  });
+}
+
+function saveLocationSuggestion(locationValue) {
+  const location = locationValue.trim();
+  if (!location) {
+    return;
+  }
+
+  localStorage.setItem(lastLocationStorageKey, location);
+  const storedLocations = getStoredLocations();
+  const lowerCaseLocation = location.toLowerCase();
+  const alreadySaved = [...locationSuggestions, ...storedLocations].some((value) => value.toLowerCase() === lowerCaseLocation);
+
+  if (!alreadySaved) {
+    storedLocations.push(location);
+    localStorage.setItem(locationStorageKey, JSON.stringify(storedLocations));
+    renderLocationSuggestions();
+  }
+}
+
 function getClassForAppliance(description) {
   const applianceName = description.trim().toLowerCase();
   return applianceClassMap[applianceName] || 'I';
@@ -313,6 +407,7 @@ function addRowFromDescriptionInput() {
 
 defaultRows.forEach((row) => addRow(row));
 populateApplianceSuggestions();
+renderLocationSuggestions();
 setDefaultDates();
 setAutoCertificateNo();
 
