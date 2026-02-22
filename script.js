@@ -1,6 +1,8 @@
 const resultsBody = document.getElementById('resultsBody');
 const addRowBtn = document.getElementById('addRowBtn');
 const printBtn = document.getElementById('printBtn');
+const newDescriptionInput = document.getElementById('newDescription');
+const applianceList = document.getElementById('applianceList');
 
 const totalItemsEl = document.getElementById('totalItems');
 const totalPassEl = document.getElementById('totalPass');
@@ -9,6 +11,80 @@ const passRateEl = document.getElementById('passRate');
 const inspectionDateEl = document.querySelector('input[name="inspectionDate"]');
 const nextInspectionDateEl = document.querySelector('input[name="nextInspectionDate"]');
 const certNoInput = document.querySelector('#certNo') || document.querySelector('input[name="certificateNo"]');
+
+const applianceSuggestions = [
+  'Air Conditioner', 'Air Fryer', 'Angle Grinder', 'Battery Charger', 'Blender', 'Boiler', 'Cable Reel',
+  'Ceiling Fan', 'Circular Saw', 'Coffee Machine', 'Compressor', 'Computer Tower', 'Dehumidifier',
+  'Desk Fan', 'Desktop Monitor', 'Dishwasher', 'Drill', 'Electric Heater', 'Extension Lead',
+  'Extractor Fan', 'Floor Lamp', 'Freezer', 'Fridge', 'Hair Dryer', 'Hand Dryer', 'Hedge Trimmer',
+  'Hot Plate', 'Immersion Heater', 'Iron', 'Kettle', 'Laptop', 'Leaf Blower', 'Microwave', 'Mixer',
+  'Phone Charger', 'Photocopier', 'Plasma Cutter', 'Power Supply', 'Printer', 'Projector',
+  'Rice Cooker', 'Sanders', 'Soldering Station', 'Space Heater', 'Table Saw', 'Television', 'Toaster',
+  'Tumble Dryer', 'Vacuum Cleaner', 'Washing Machine', 'Water Cooler', 'Water Pump', 'Welder',
+  'Work Light', 'Router', 'Server Rack', 'Stereo Amplifier', 'Subwoofer', 'Steam Cleaner'
+];
+
+const applianceClassMap = {
+  'air conditioner': 'I',
+  'air fryer': 'I',
+  'angle grinder': 'I',
+  'battery charger': 'I',
+  'blender': 'I',
+  'boiler': 'I',
+  'cable reel': 'I',
+  'ceiling fan': 'I',
+  'circular saw': 'I',
+  'coffee machine': 'I',
+  'compressor': 'I',
+  'computer tower': 'I',
+  'dehumidifier': 'I',
+  'desk fan': 'I',
+  'desktop monitor': 'I',
+  'dishwasher': 'I',
+  'drill': 'II',
+  'electric heater': 'I',
+  'extension lead': 'I',
+  'extractor fan': 'I',
+  'floor lamp': 'II',
+  'freezer': 'I',
+  'fridge': 'I',
+  'hair dryer': 'II',
+  'hand dryer': 'I',
+  'hedge trimmer': 'II',
+  'hot plate': 'I',
+  'immersion heater': 'I',
+  'iron': 'I',
+  'kettle': 'I',
+  'laptop': 'II',
+  'leaf blower': 'II',
+  'microwave': 'I',
+  'mixer': 'II',
+  'phone charger': 'II',
+  'photocopier': 'I',
+  'plasma cutter': 'I',
+  'power supply': 'II',
+  'printer': 'I',
+  'projector': 'I',
+  'rice cooker': 'I',
+  'sanders': 'II',
+  'soldering station': 'I',
+  'space heater': 'I',
+  'table saw': 'I',
+  'television': 'II',
+  'toaster': 'I',
+  'tumble dryer': 'I',
+  'vacuum cleaner': 'II',
+  'washing machine': 'I',
+  'water cooler': 'I',
+  'water pump': 'I',
+  'welder': 'I',
+  'work light': 'II',
+  'router': 'II',
+  'server rack': 'I',
+  'stereo amplifier': 'I',
+  'subwoofer': 'I',
+  'steam cleaner': 'I'
+};
 
 const defaultRows = [
   {
@@ -203,9 +279,51 @@ function addRow(data = {}) {
   updateTotals();
 }
 
+function populateApplianceSuggestions() {
+  if (!applianceList) {
+    return;
+  }
+
+  applianceSuggestions.forEach((appliance) => {
+    const option = document.createElement('option');
+    option.value = appliance;
+    applianceList.appendChild(option);
+  });
+}
+
+function getClassForAppliance(description) {
+  const applianceName = description.trim().toLowerCase();
+  return applianceClassMap[applianceName] || 'I';
+}
+
+function addRowFromDescriptionInput() {
+  if (!newDescriptionInput) {
+    return;
+  }
+
+  const applianceDescription = newDescriptionInput.value.trim();
+  if (!applianceDescription) {
+    return;
+  }
+
+  addRow({ appliance: applianceDescription, classType: getClassForAppliance(applianceDescription) });
+  newDescriptionInput.value = '';
+  newDescriptionInput.focus();
+}
+
 defaultRows.forEach((row) => addRow(row));
+populateApplianceSuggestions();
 setDefaultDates();
 setAutoCertificateNo();
 
 addRowBtn.addEventListener('click', () => addRow());
 printBtn.addEventListener('click', () => window.print());
+
+if (newDescriptionInput) {
+  newDescriptionInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      addRowFromDescriptionInput();
+    }
+  });
+}

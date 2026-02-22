@@ -132,6 +132,11 @@ textarea {
   border: 1px solid var(--line);
 }
 
+.add-appliance-controls {
+  margin-bottom: 10px;
+  max-width: 420px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

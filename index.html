@@ -88,6 +88,14 @@
             <button id="addRowBtn" type="button" class="btn subtle">+ Add Item</button>
           </div>
 
+          <div class="add-appliance-controls no-print">
+            <label for="newDescription">
+              Add appliance
+              <input id="newDescription" name="newDescription" type="text" list="applianceList" placeholder="Start typing appliance description" autocomplete="off" />
+            </label>
+            <datalist id="applianceList"></datalist>
+          </div>
+
           <div class="table-wrap">
             <table id="resultsTable">
               <thead>
