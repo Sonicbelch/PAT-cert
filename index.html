@@ -32,7 +32,7 @@
 
       <main>
         <section class="card part-one-card">
-          <h2 class="part-title">Part 1: Details of Installation</h2>
+          <h2 class="section-bar">Part 1: Details of Installation</h2>
           <div class="part-one-grid">
             <div class="part-column">
               <h3>Site Details</h3>
@@ -85,9 +85,9 @@
           </label>
         </section>
 
-        <section class="card">
+        <section class="card part-two-card">
           <div class="section-head">
-            <h2>Part 2: Results of Visual Inspection and Testing</h2>
+            <h2 class="section-bar">Part 2: Results of Visual Inspection and Testing</h2>
             <button id="addRowBtn" type="button" class="btn subtle no-print">+ Add Item</button>
           </div>
 
@@ -102,6 +102,19 @@
 
           <div class="table-wrap">
             <table id="resultsTable">
+              <colgroup>
+                <col class="col-no" />
+                <col class="col-asset" />
+                <col class="col-description" />
+                <col class="col-location" />
+                <col class="col-class" />
+                <col class="col-visual" />
+                <col class="col-earth" />
+                <col class="col-insulation" />
+                <col class="col-polarity" />
+                <col class="col-result" />
+                <col class="col-actions" />
+              </colgroup>
               <thead>
                 <tr>
                   <th>#</th>
@@ -123,16 +136,16 @@
 
           <div class="totals" aria-live="polite">
             <div class="total-box total-items">
-              <span>Total Items</span>
+              <span>Total Items Tested</span>
               <strong id="totalItems">0</strong>
             </div>
-            <div class="total-box total-pass">
-              <span>Passed</span>
-              <strong id="totalPass">0</strong>
-            </div>
             <div class="total-box total-fail">
-              <span>Failed</span>
+              <span>Total Failed Items Tested</span>
               <strong id="totalFail">0</strong>
+            </div>
+            <div class="total-box total-pass">
+              <span>Total Passed Items Tested</span>
+              <strong id="totalPass">0</strong>
             </div>
             <div class="total-box total-rate">
               <span>Pass Rate</span>
