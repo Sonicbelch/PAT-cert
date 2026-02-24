@@ -31,48 +31,55 @@
       </header>
 
       <main>
-        <section class="card">
-          <h2>Part 1: Details of Installation</h2>
-          <div class="form-grid">
-            <label>
-              Client Name
-              <input type="text" name="clientName" />
-            </label>
-            <label>
-              Site Address
-              <input type="text" name="siteAddress" />
-            </label>
-            <label>
-              Postcode
-              <input type="text" name="postcode" />
-            </label>
-            <label>
-              Certificate No.
-              <input type="text" name="certificateNo" />
-            </label>
-            <label>
-              Date of Inspection
-              <input type="text" name="inspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
-            </label>
-            <label>
-              Inspector Name
-              <input type="text" name="inspectorName" value="Nick Ravenscroft" />
-            </label>
-            <label>
-              Company
-              <input
-                type="text"
-                name="company"
-                value="Electricians On Call, 18 Bulstrode Street, London W1U 2JL"
-                readonly
-              />
-            </label>
-            <label>
-              Next Inspection Due
-              <input type="text" name="nextInspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
-            </label>
+        <section class="card part-one-card">
+          <h2 class="part-title">Part 1: Details of Installation</h2>
+          <div class="part-one-grid">
+            <div class="part-column">
+              <h3>Site Details</h3>
+              <label>
+                Client Name
+                <input type="text" name="clientName" />
+              </label>
+              <label>
+                Site Address
+                <input type="text" name="siteAddress" />
+              </label>
+              <label>
+                Postcode
+                <input type="text" name="postcode" />
+              </label>
+            </div>
+
+            <div class="part-column">
+              <h3>Certificate / Company Details</h3>
+              <label>
+                Certificate No.
+                <input type="text" name="certificateNo" />
+              </label>
+              <label>
+                Date of Inspection
+                <input type="text" name="inspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
+              </label>
+              <label>
+                Next Inspection Due
+                <input type="text" name="nextInspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
+              </label>
+              <label>
+                Inspector Name
+                <input type="text" name="inspectorName" value="Nick Ravenscroft" />
+              </label>
+              <label>
+                Company
+                <input
+                  type="text"
+                  name="company"
+                  value="Electricians On Call, 18 Bulstrode Street, London W1U 2JL"
+                  readonly
+                />
+              </label>
+            </div>
           </div>
-          <label class="full-width notes-field">
+          <label class="notes-field">
             Comments / Limitations
             <textarea rows="4" name="comments"></textarea>
           </label>
