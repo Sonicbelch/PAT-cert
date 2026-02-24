@@ -5,6 +5,7 @@
   --line: #d9d9d9;
   --card: #ffffff;
   --primary: #0f4c81;
+  --accent: #e10600;
   --pass: #1f8f4b;
   --fail: #be123c;
 }
@@ -86,16 +87,45 @@ h2 {
   margin: 0 0 12px;
 }
 
-.form-grid {
+.part-one-card {
+  border-color: #9ca3af;
+  padding: 0;
+}
+
+.part-title {
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 0.95rem;
+  color: #fff;
+  background: var(--accent);
+}
+
+.part-one-grid {
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 60% 40%;
+  gap: 12px;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.part-column {
+  display: grid;
+  gap: 7px;
+  align-content: start;
+}
+
+.part-column h3 {
+  margin: 0 0 2px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: #374151;
+  letter-spacing: 0.02em;
 }
 
 label {
   display: grid;
-  gap: 6px;
-  font-size: 0.85rem;
+  gap: 4px;
+  font-size: 0.78rem;
   color: var(--muted);
 }
 
@@ -103,7 +133,7 @@ input,
 select,
 textarea {
   width: 100%;
-  padding: 8px;
+  padding: 6px;
   border: 1px solid #cbd5e1;
   border-radius: 2px;
   font: inherit;
@@ -115,8 +145,10 @@ textarea {
   resize: vertical;
 }
 
-.full-width {
-  margin-top: 10px;
+.notes-field {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
 }
 
 .section-head {
@@ -257,7 +289,7 @@ td.row-number {
 }
 
 @media (max-width: 900px) {
-  .form-grid {
+  .part-one-grid {
     grid-template-columns: 1fr;
   }
 
@@ -280,6 +312,11 @@ td.row-number {
 
   .card {
     break-inside: avoid;
+  }
+
+  .part-one-grid {
+    gap: 10px;
+    border-color: #c7c7c7;
   }
 
   .no-print,
