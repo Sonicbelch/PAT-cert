@@ -7,92 +7,102 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="page-wrap">
-      <header class="certificate-header">
-        <div class="header-branding">
-          <img
-            src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/649553f94357fbf79c52ea7d_EOCLogoB3Asset%2027.png"
-            alt="Motorcycle logo"
-            class="branding-logo"
-          />
-          <img
-            src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/6499a1507ff81ae28c67b4c6_textLogoB4Asset%2029-p-500.png"
-            alt="Text logo"
-            class="branding-logo"
-          />
-        </div>
+    <div class="admin-input-view">
+      <main class="print-certificate-view">
+        <header class="certificate-header">
+          <div class="header-branding">
+            <img
+              src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/649553f94357fbf79c52ea7d_EOCLogoB3Asset%2027.png"
+              alt="Motorcycle logo"
+              class="branding-logo"
+            />
+            <img
+              src="https://cdn.prod.website-files.com/647c5a25017a9563bc923398/6499a1507ff81ae28c67b4c6_textLogoB4Asset%2029-p-500.png"
+              alt="Text logo"
+              class="branding-logo"
+            />
+          </div>
 
-        <div class="header-title-block">
-          <h1 class="certificate-title">Portable / Fixed Appliance PAT Certificate</h1>
-          <p class="certificate-subtitle">
-            Equipment formal visual and combined inspection and test
-          </p>
-        </div>
-      </header>
+          <div class="header-title-block">
+            <h1 class="certificate-title">Portable / Fixed Appliance PAT Certificate</h1>
+            <p class="certificate-subtitle">
+              Equipment formal visual and combined inspection and test
+            </p>
+          </div>
+        </header>
 
-      <main>
-        <section class="card part-one-card">
-          <h2 class="section-bar">Part 1: Details of Installation</h2>
-          <div class="part-one-grid">
-            <div class="part-column">
-              <h3>Site Details</h3>
-              <label>
-                Client Name
-                <input type="text" name="clientName" />
-              </label>
-              <label>
-                Site Address
-                <input type="text" name="siteAddress" />
-              </label>
-              <label>
-                Postcode
-                <input type="text" name="postcode" />
-              </label>
+        <section class="admin-section section-installation">
+          <h2 class="section-title">Part 1: Details of Installation</h2>
+
+          <div class="input-card-stack">
+            <div class="input-card card-site-details">
+              <h3 class="card-title">Site Details</h3>
+              <div class="field-row">
+                <label class="field">
+                  Client Name
+                  <input type="text" name="clientName" />
+                </label>
+                <label class="field">
+                  Site Address
+                  <input type="text" name="siteAddress" />
+                </label>
+                <label class="field field-postcode">
+                  Postcode
+                  <input type="text" name="postcode" />
+                </label>
+              </div>
             </div>
 
-            <div class="part-column">
-              <h3>Certificate / Company Details</h3>
-              <label>
-                Certificate No.
-                <input type="text" name="certificateNo" />
-              </label>
-              <label>
-                Date of Inspection
-                <input type="text" name="inspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
-              </label>
-              <label>
-                Next Inspection Due
-                <input type="text" name="nextInspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
-              </label>
-              <label>
-                Inspector Name
-                <input type="text" name="inspectorName" value="Nick Ravenscroft" />
-              </label>
-              <label>
-                Company
-                <input
-                  type="text"
-                  name="company"
-                  value="Electricians On Call, 18 Bulstrode Street, London W1U 2JL"
-                  readonly
-                />
+            <div class="input-card card-certificate-details">
+              <h3 class="card-title">Certificate / Company Details</h3>
+              <div class="field-row">
+                <label class="field">
+                  Certificate No.
+                  <input type="text" name="certificateNo" />
+                </label>
+                <label class="field">
+                  Date of Inspection
+                  <input type="text" name="inspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
+                </label>
+                <label class="field">
+                  Next Inspection Due
+                  <input type="text" name="nextInspectionDate" placeholder="dd/mm/yyyy" inputmode="numeric" />
+                </label>
+              </div>
+              <div class="field-row">
+                <label class="field">
+                  Inspector Name
+                  <input type="text" name="inspectorName" value="Nick Ravenscroft" />
+                </label>
+                <label class="field field-wide">
+                  Company
+                  <input
+                    type="text"
+                    name="company"
+                    value="Electricians On Call, 18 Bulstrode Street, London W1U 2JL"
+                    readonly
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div class="input-card card-comments">
+              <label class="field">
+                Comments / Limitations
+                <textarea rows="4" name="comments"></textarea>
               </label>
             </div>
           </div>
-          <label class="notes-field">
-            Comments / Limitations
-            <textarea rows="4" name="comments"></textarea>
-          </label>
         </section>
 
-        <section class="card part-two-card">
+        <section class="admin-section section-results">
           <div class="section-head">
-            <h2 class="section-bar">Part 2: Results of Visual Inspection and Testing</h2>
+            <h2 class="section-title">Part 2: Results of Visual Inspection and Testing</h2>
             <button id="addRowBtn" type="button" class="btn subtle no-print">+ Add Item</button>
           </div>
 
           <div class="add-appliance-controls no-print">
-            <label for="newDescription">
+            <label class="field" for="newDescription">
               Add appliance
               <input id="newDescription" name="newDescription" type="text" list="applianceList" placeholder="Start typing appliance description" autocomplete="off" />
             </label>
@@ -135,32 +145,30 @@
           </div>
 
           <div class="totals" aria-live="polite">
-            <div class="total-box total-items">
+            <div class="total-item total-items">
               <span>Total Items Tested</span>
               <strong id="totalItems">0</strong>
             </div>
-            <div class="total-box total-fail">
+            <div class="total-item total-fail">
               <span>Total Failed Items Tested</span>
               <strong id="totalFail">0</strong>
             </div>
-            <div class="total-box total-pass">
+            <div class="total-item total-pass">
               <span>Total Passed Items Tested</span>
               <strong id="totalPass">0</strong>
             </div>
-            <div class="total-box total-rate">
+            <div class="total-item total-rate">
               <span>Pass Rate</span>
               <strong id="passRate">0%</strong>
             </div>
           </div>
 
-          <div class="repair-codes">
-            Repair codes: 1 - Damaged flex – Re-terminated 2 - Damaged – Plug removed 3 - Safety fault R1 - Replaced plug top R2 - Replaced plug top fuse R3 - Change plug top fuse from 13A to 3A fuse R4 -<br />
-            Change plug top fuse from 13A to 5A fuse R5 - Change plug top fuse from 13A to 10A fuse R6 - Replaced extension lead R7 - Shortened damaged power-cord/cable and refitted plug top<br />
-            R8 - Rewired incorrectly wired plug top R9 - Repaired/refitted insecure or wrongly fitted power-cord/cable grip R10 - Removed cardboard wiring diagram from plug top (Fire hazard)<br />
-            R11 - Repaired or refitted appliance case<br />
-            Created by EOC © Copyright Electricians On Call 2025<br />
-            18 Bulstrode Street, London W1U 2JL
-          </div>
+          <p class="repair-codes">
+            Repair codes: 1 - Damaged flex – Re-terminated 2 - Damaged – Plug removed 3 - Safety fault R1 - Replaced plug top R2 - Replaced plug top fuse R3 - Change plug top fuse from 13A to 3A fuse R4 -
+            Change plug top fuse from 13A to 5A fuse R5 - Change plug top fuse from 13A to 10A fuse R6 - Replaced extension lead R7 - Shortened damaged power-cord/cable and refitted plug top
+            R8 - Rewired incorrectly wired plug top R9 - Repaired/refitted insecure or wrongly fitted power-cord/cable grip R10 - Removed cardboard wiring diagram from plug top (Fire hazard)
+            R11 - Repaired or refitted appliance case Created by EOC © Copyright Electricians On Call 2025 18 Bulstrode Street, London W1U 2JL
+          </p>
         </section>
 
         <div class="footer-actions no-print">
