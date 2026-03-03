@@ -1,13 +1,13 @@
 :root {
-  --bg: #f5f7fa;
-  --text: #1f2937;
-  --muted: #4b5563;
-  --line: #b5b5b5;
-  --card: #ffffff;
+  --screen-bg: #eef2f7;
+  --screen-text: #1f2937;
+  --screen-muted: #475569;
+  --screen-line: #d6dde8;
+  --screen-card: #ffffff;
+  --screen-head: #f5f8fc;
   --primary: #0f4c81;
   --pass: #1f8f4b;
   --fail: #be123c;
-  --section-fill: #f2f2f2;
 }
 
 * {
@@ -17,128 +17,133 @@
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  color: var(--screen-text);
 }
 
-.page-wrap {
-  max-width: 190mm;
-  margin: 20px auto;
-  padding: 5mm;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  font-size: 14px;
+/* Screen-only admin input layout */
+.admin-input-view {
+  min-height: 100vh;
+  background: var(--screen-bg);
+  padding: 28px 24px 40px;
 }
 
-.certificate-header {
+.admin-input-view .print-certificate-view {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  background: var(--screen-card);
+  border: 1px solid #dde4ee;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.admin-input-view .certificate-header {
   display: flex;
   align-items: flex-start;
-  gap: 5mm;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 4mm;
-  margin-bottom: 5mm;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--screen-line);
 }
 
 .header-branding {
-  width: 45mm;
-  flex: 0 0 45mm;
+  width: 220px;
+  flex: 0 0 220px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .branding-logo {
-  display: block;
   width: 100%;
-  max-width: 45mm;
+  display: block;
   height: auto;
-}
-
-.branding-logo + .branding-logo {
-  margin-top: 2mm;
 }
 
 .header-title-block {
   flex: 1;
-  min-width: 0;
-  text-align: center;
 }
 
 .certificate-title {
   margin: 0;
-  font-weight: 700;
-  font-size: 1.45rem;
-  line-height: 1.15;
+  font-size: 1.85rem;
+  line-height: 1.2;
 }
 
 .certificate-subtitle {
-  margin: 1.5mm 0 0;
+  margin: 8px 0 0;
+  color: var(--screen-muted);
   font-size: 1rem;
 }
 
-main {
-  display: grid;
-  gap: 5mm;
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.card {
-  border: 1px solid var(--line);
-  padding: 4mm;
-}
-
-.section-bar {
+.section-title {
   margin: 0;
-  display: inline-block;
-  background: var(--section-fill);
-  border: 1px solid var(--line);
-  border-bottom: 0;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  line-height: 1.2;
-  padding: 1.5mm 3mm;
 }
 
-.part-one-card {
-  padding: 0;
+.input-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.part-one-grid {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  gap: 4mm;
-  padding: 3.5mm;
-  border-top: 1px solid var(--line);
+.input-card {
+  border: 1px solid var(--screen-line);
+  border-radius: 12px;
+  background: #fbfdff;
+  padding: 18px;
 }
 
-.part-column {
-  display: grid;
-  gap: 2.5mm;
-  align-content: start;
-}
-
-.part-column h3 {
-  margin: 0;
-  font-size: 0.79rem;
+.card-title {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  color: var(--screen-muted);
   text-transform: uppercase;
-  color: #374151;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
-label {
-  display: grid;
-  gap: 1.2mm;
-  font-size: 0.79rem;
-  color: var(--muted);
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  flex: 1 1 240px;
+  font-size: 0.86rem;
+  color: var(--screen-muted);
+}
+
+.field-postcode {
+  flex: 0 0 180px;
+}
+
+.field-wide {
+  flex: 2 1 420px;
 }
 
 input,
 select,
 textarea {
   width: 100%;
-  padding: 5px;
-  border: 1px solid #c9c9c9;
-  border-radius: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 9px 10px;
   font: inherit;
-  color: var(--text);
+  color: var(--screen-text);
   background: #fff;
 }
 
@@ -146,33 +151,22 @@ textarea {
   resize: vertical;
 }
 
-.notes-field {
-  display: grid;
-  gap: 1.2mm;
-  padding: 3.5mm;
-  border-top: 1px solid var(--line);
-}
-
 .section-head {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 3mm;
+  align-items: center;
+  gap: 12px;
 }
 
-.section-head .section-bar {
-  margin-bottom: -1px;
+.add-appliance-controls {
+  max-width: 460px;
 }
 
 .table-wrap {
   overflow-x: auto;
-  border: 1px solid var(--line);
-}
-
-.add-appliance-controls {
-  margin-bottom: 3mm;
-  max-width: 420px;
+  border: 1px solid var(--screen-line);
+  border-radius: 10px;
+  background: #f9fbfd;
 }
 
 table {
@@ -183,130 +177,91 @@ table {
 
 th,
 td {
-  border: 1px solid var(--line);
-  padding: 2px 4px;
-  font-size: 0.72rem;
+  border: 1px solid #d8e1eb;
+  padding: 13px 12px;
+  font-size: 0.78rem;
   text-align: left;
   vertical-align: middle;
 }
 
 th {
-  background: #f2f2f2;
-  font-size: 0.72rem;
+  background: var(--screen-head);
   font-weight: 700;
-  letter-spacing: 0.01em;
 }
 
 td.row-number {
   text-align: center;
-  color: var(--muted);
+  color: var(--screen-muted);
 }
 
-.col-no {
-  width: 5%;
-}
-
-.col-asset {
-  width: 12%;
-}
-
-.col-description {
-  width: 22%;
-}
-
-.col-location {
-  width: 13%;
-}
-
-.col-class {
-  width: 6%;
-}
-
-.col-visual {
-  width: 7%;
-}
-
-.col-earth {
-  width: 12%;
-}
-
-.col-insulation {
-  width: 12%;
-}
-
-.col-polarity {
-  width: 6%;
-}
-
-.col-result {
-  width: 5%;
-}
-
-.col-actions {
-  width: 10%;
-}
+.col-no { width: 5%; }
+.col-asset { width: 11%; }
+.col-description { width: 21%; }
+.col-location { width: 12%; }
+.col-class { width: 6%; }
+.col-visual { width: 8%; }
+.col-earth { width: 11%; }
+.col-insulation { width: 11%; }
+.col-polarity { width: 7%; }
+.col-result { width: 8%; }
+.col-actions { width: 10%; }
 
 .totals {
-  margin-top: 4mm;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 3mm;
-  border: 1px solid var(--line);
-  padding: 3.5mm;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.total-box {
-  border: 1px solid var(--line);
-  min-height: 15mm;
-  padding: 2.5mm;
-  display: grid;
-  align-content: center;
-  gap: 1mm;
+.total-item {
+  border: 1px solid var(--screen-line);
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 12px 14px;
+  min-width: 180px;
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.total-box span {
-  font-size: 0.77rem;
-  color: #111827;
+.total-item span {
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
-.total-box strong {
-  font-size: 1.1rem;
-  line-height: 1;
+.total-item strong {
+  font-size: 1.2rem;
 }
 
-.total-pass strong {
-  color: var(--pass);
-}
+.total-pass strong { color: var(--pass); }
+.total-fail strong { color: var(--fail); }
 
-.total-fail strong {
-  color: var(--fail);
+.repair-codes {
+  margin: 6px 0 0;
+  border-top: 1px solid var(--screen-line);
+  padding-top: 12px;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: #374151;
 }
 
 .footer-actions {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 12px;
-  justify-content: flex-end;
 }
 
 .print-note {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
-.repair-codes {
-  margin-top: 4mm;
-  border-top: 1px solid var(--line);
-  padding-top: 2.5mm;
-  font-size: 0.71rem;
-  line-height: 1.35;
+  color: var(--screen-muted);
+  font-size: 0.8rem;
 }
 
 .btn {
   border: 1px solid #cbd5e1;
+  border-radius: 8px;
   background: #fff;
-  color: var(--text);
+  color: var(--screen-text);
   padding: 8px 12px;
   font-size: 0.85rem;
   cursor: pointer;
@@ -320,7 +275,7 @@ td.row-number {
 
 .btn.subtle {
   font-size: 0.78rem;
-  padding: 6px 10px;
+  padding: 7px 10px;
 }
 
 .btn.delete {
@@ -330,142 +285,228 @@ td.row-number {
   width: 100%;
 }
 
-.result-pass {
-  background: #effcf3;
-}
+.result-pass { background: #effcf3; }
+.result-fail { background: #fff1f2; }
 
-.result-fail {
-  background: #fff1f2;
-}
-
-@media (max-width: 900px) {
-  .part-one-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 960px) {
+  .admin-input-view .certificate-header {
+    flex-direction: column;
   }
 
-  .totals {
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  .header-branding {
+    width: 180px;
+    flex-basis: auto;
   }
 }
 
 @media print {
   @page {
-    size: A4;
-    margin: 10mm;
+    size: A4 portrait;
+    margin: 12mm;
   }
 
+  /* Print-only certificate layout */
   body {
     margin: 0;
     background: #fff;
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-    font-size: 10.5pt;
     color: #000;
   }
 
-  .page-wrap {
+  .admin-input-view {
+    padding: 0;
+    background: #fff;
+  }
+
+  .print-certificate-view {
     margin: 0;
     padding: 0;
     border: 0;
     box-shadow: none;
-    max-width: 190mm;
-    font-size: 10.5pt;
+    border-radius: 0;
+    width: auto;
+    display: block;
+    font-size: 11px;
+    line-height: 1.2;
   }
 
-  .certificate-title {
-    font-size: 14pt;
-    font-weight: 700;
-  }
-
-  .certificate-subtitle {
-    font-size: 10.5pt;
-  }
-
-  .section-bar {
-    font-size: 10.5pt;
-    font-weight: 700;
-    background: #f2f2f2 !important;
-  }
-
-  .card {
-    break-inside: avoid;
-    padding: 4mm;
-  }
-
-  .part-one-card {
-    padding: 0;
-  }
-
-  .part-one-grid {
+  .print-certificate-view .certificate-header {
+    display: grid;
+    grid-template-columns: 42mm 1fr;
     gap: 4mm;
-    padding: 3.5mm;
+    align-items: start;
+    border-bottom: 1px solid #999;
+    margin-bottom: 2.5mm;
+    padding-bottom: 2mm;
+    page-break-inside: avoid;
   }
 
-  .part-column {
-    gap: 2mm;
-  }
-
-  .part-column h3 {
-    font-size: 8.8pt;
-  }
-
-  label {
-    gap: 1mm;
-    font-size: 8.8pt;
-    color: #1f2937;
-  }
-
-  table {
-    table-layout: fixed;
+  .print-certificate-view .header-branding {
     width: 100%;
+    flex: none;
+    gap: 1mm;
   }
 
-  th,
-  td {
-    padding: 2px 4px;
-    border: 1px solid #b5b5b5;
-    font-size: 9.5pt;
-    vertical-align: middle;
+  .print-certificate-view .certificate-title {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.1;
   }
 
-  th {
-    background: #f2f2f2 !important;
+  .print-certificate-view .certificate-subtitle {
+    margin: 1mm 0 0;
+    font-size: 11px;
+    color: #000;
+  }
+
+  .print-certificate-view .admin-section {
+    gap: 2mm;
+    margin-bottom: 2.5mm;
+    page-break-inside: avoid;
+  }
+
+  .print-certificate-view .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .print-certificate-view .input-card-stack {
+    gap: 1.5mm;
+  }
+
+  .print-certificate-view .input-card {
+    border: 1px solid #a8a8a8;
+    border-radius: 0;
+    padding: 1.8mm 2.2mm;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+
+  .print-certificate-view .card-title {
+    margin: 0 0 1.2mm;
+    font-size: 11px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #000;
+  }
+
+  .print-certificate-view .field-row {
+    gap: 1.5mm;
+  }
+
+  .print-certificate-view .field {
+    min-width: 0;
+    flex: 1 1 30%;
+    gap: 1mm;
+    font-size: 10px;
+    color: #000;
+  }
+
+  .print-certificate-view .field-postcode {
+    flex-basis: 18%;
+  }
+
+  .print-certificate-view .field-wide {
+    flex-basis: 60%;
+  }
+
+  .print-certificate-view .card-comments textarea {
+    max-height: 20mm;
+    min-height: 14mm;
+    overflow: hidden;
+  }
+
+  .print-certificate-view .table-wrap {
+    border: 1px solid #9f9f9f;
+    border-radius: 0;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+
+  .print-certificate-view table {
+    table-layout: fixed;
+  }
+
+  .print-certificate-view th,
+  .print-certificate-view td {
+    border: 1px solid #aaaaaa;
+    padding: 1.2mm 1.2mm;
+    font-size: 10px;
+    line-height: 1.1;
+  }
+
+  .print-certificate-view th {
+    font-size: 10px;
+    font-weight: 700;
+    background: #f5f5f5 !important;
+  }
+
+  .print-certificate-view .col-no { width: 4%; }
+  .print-certificate-view .col-asset { width: 10%; }
+  .print-certificate-view .col-description { width: 20%; }
+  .print-certificate-view .col-location { width: 11%; }
+  .print-certificate-view .col-class { width: 5.5%; }
+  .print-certificate-view .col-visual { width: 7%; }
+  .print-certificate-view .col-earth { width: 11%; }
+  .print-certificate-view .col-insulation { width: 11%; }
+  .print-certificate-view .col-polarity { width: 6.5%; }
+  .print-certificate-view .col-result { width: 5%; }
+
+  .print-certificate-view .totals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.2mm 4mm;
+    margin-top: 1.8mm;
+    border: 0;
+    padding: 0;
+    page-break-inside: avoid;
+  }
+
+  .print-certificate-view .total-item {
+    border: 0;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    min-width: 0;
+    flex: 1 1 24%;
+    gap: 0.2mm;
+  }
+
+  .print-certificate-view .total-item span {
+    font-size: 10px;
     font-weight: 700;
   }
 
-  .totals {
-    margin-top: 4mm;
-    border: 1px solid #b5b5b5;
-    gap: 3mm;
-    padding: 3.5mm;
+  .print-certificate-view .total-item strong {
+    font-size: 11px;
   }
 
-  .total-box {
-    border: 1px solid #b5b5b5;
-    min-height: 14mm;
-  }
-
-  .total-box span {
-    font-size: 9pt;
+  .print-certificate-view .repair-codes {
+    margin-top: 1.5mm;
+    padding-top: 1.5mm;
+    border-top: 1px solid #aaa;
+    font-size: 9px;
+    line-height: 1.2;
   }
 
   input,
   select,
   textarea {
     border: 0;
-    outline: none;
-    box-shadow: none;
     border-radius: 0;
+    box-shadow: none;
     padding: 0;
-    appearance: none;
-    -webkit-appearance: none;
     background: transparent;
     color: #000;
+    appearance: none;
+    -webkit-appearance: none;
   }
 
   .no-print,
   .actions-col,
   .col-actions,
-  td .btn.delete {
+  td .btn.delete,
+  .footer-actions {
     display: none !important;
   }
 }
